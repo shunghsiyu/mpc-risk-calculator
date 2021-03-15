@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+  <title>Metachronous peritoneal carcinomatosis (mPC) risk calculator for pT4NxM0R0 colon cancer</title>
+  
+<style>
+body {
+  color: rgb(89, 89, 89);
+  background-color: rgb(240, 240, 240);
+}
+
+main h1 {
+  margin-bottom: 1em;
+}
+
+form .row {
+  border-color: rgb(215, 215, 215) !important;
+  padding: 0.3em 0;
+}
+
+form .row div {
+  margin: 0.3em 0;
+}
+
+form .row label {
+  min-width: 6em;
+}
+</style>
+
+</head>
+
+<body translate="no">
+  
+
+
+  <main class="container">
+    <h1>Metachronous peritoneal carcinomatosis (mPC) risk calculator for pT4NxM0R0 colon cancer</h1>
+    <form>
+      <div class="row border-top border-secondary">
+        <div class="col-md-4">
+          <label>Tumor location</label>
+        </div>
+        <div class="col-md-8">
+          <div class="btn-group" role="group">
+            <input class="btn-check" type="radio" id="left-colon" name="tumor-location" value="0" onchange="changeHandler(this);" onload="changeHandler(this);">
+            <label class="btn btn-outline-secondary" for="left-colon">Left Colon</label>
+            <input class="btn-check" type="radio" id="right-colon" name="tumor-location" value="2" onchange="changeHandler(this);" onload="changeHandler(this);" checked="checked">
+            <label class="btn btn-outline-secondary" for="right-colon">Right Colon</label>
+          </div>
+        </div>
+      </div>
+      <div class="row border-top border-light">
+        <div class="col-md-4">
+          <label>Histological type</label>
+        </div>
+        <div class="col-md-8">
+          <div class="btn-group" role="group">
+            <input class="btn-check" type="radio" id="adenocarcinoma" name="histological-type" value="0" onchange="changeHandler(this);" checked="checked">
+            <label class="btn btn-outline-secondary" for="adenocarcinoma">Adenocarcinoma</label>
+            <input class="btn-check" type="radio" id="mucinous-adenocarcinoma" name="histological-type" value="3" onchange="changeHandler(this);">
+            <label class="btn btn-outline-secondary" for="mucinous-adenocarcinoma">Mucinous adenocarcinoma</label>
+          </div>
+        </div>
+      </div>
+      <div class="row border-top border-light">
+        <div class="col-md-4">
+          <label>Pre-operation
+            CEA</label>
+        </div>
+        <div class="col-md-8">
+          <div class="btn-group" role="group">
+            <input class="btn-check" type="radio" id="leq-5" name="pre-operation-cea" value="0" onchange="changeHandler(this);" checked="checked">
+            <label class="btn btn-outline-secondary" for="leq-5">≤ 5 ng/mL</label>
+            <input class="btn-check" type="radio" id="gt-5" name="pre-operation-cea" value="2" onchange="changeHandler(this);">
+            <label class="btn btn-outline-secondary" for="gt-5">&gt; 5 ng/mL</label>
+          </div>
+        </div>
+      </div>
+      <div class="row border-top border-light">
+        <div class="col-md-4">
+          <label>pT stage</label>
+        </div>
+        <div class="col-md-8">
+          <div class="btn-group" role="group">
+            <input class="btn-check" type="radio" id="pt-4a" name="pt-stage" value="0" onchange="changeHandler(this);" checked="checked">
+            <label class="btn btn-outline-secondary" for="pt-4a">4a</label>
+            <input class="btn-check" type="radio" id="pt-4b" name="pt-stage" value="3" onchange="changeHandler(this);">
+            <label class="btn btn-outline-secondary" for="pt-4b">4b</label>
+          </div>
+        </div>
+      </div>
+      <div class="row border-top border-bottom border-light">
+        <div class="col-md-4">
+          <label>pN stage</label>
+        </div>
+        <div class="col-md-8">
+          <div class="btn-group" role="group">
+            <input class="btn-check" type="radio" id="pn-n0" name="pn-stage" value="0" onchange="changeHandler(this);">
+            <label class="btn btn-outline-secondary" for="pn-n0">N0</label>
+            <input class="btn-check" type="radio" id="pn-n1" name="pn-stage" value="2" onchange="changeHandler(this);" checked="checked">
+            <label class="btn btn-outline-secondary" for="pn-n1">N1</label>
+            <input class="btn-check" type="radio" id="pn-n2" name="pn-stage" value="5" onchange="changeHandler(this);">
+            <label class="btn btn-outline-secondary" for="pn-n2">N2</label>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="card text-white bg-secondary mt-3">
+      <div class="card-body">
+        <h3 class="card-title mb-3">Result</h3>
+        <p id="result" class="card-text result">Total score: 4, <strong>low-risk</strong></p>
+        <p id="detail" class="card-text">The 1 year and 3 year mPC recurrence-free survivals were 96.5% and 93.3% in the low-risk group<br>the estimated 5-year overall survival was 72.3%</p>
+      </div>
+    </div>
+  </main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+<script id="rendered-js">
+"use strict";
+
+const CATEGORY_NAMES = {
+  "tumor-location": "Tumor location",
+  "histological-type": "Histological type",
+  "pre-operation-cea": "Pre-operation CEA",
+  "pt-stage": "pT stage",
+  "pn-stage": "pN stage" };
+
+const LOWRISK = "The 1 year and 3 year mPC recurrence-free survivals were 96.5% and 93.3% in the low-risk group<br/>the estimated 5-year overall survival was 72.3%";
+const HIGHRISK = "The 1 year and 3 year mPC recurrence-free survivals were 91.9% and 78.3% in the high-risk group<br/>the estimated 5-year overall survival was 52.9%";
+const valueStore = {};
+
+function changeHandler(radio) {
+  if (radio.checked !== true) {
+    return;
+  }
+  const category = radio.getAttribute("name");
+  const points = Number(radio.getAttribute("value"));
+  valueStore[category] = points;
+
+  const resultElement = document.getElementById('result');
+  const detailElement = document.getElementById('detail');
+  updateResult(valueStore, resultElement, detailElement);
+}
+
+function updateResult(values, resultElement, detailElement) {
+  const missingEntries = missingCategories(values);
+  if (missingEntries.length > 0) {
+    resultElement.innerText = "Please fill out " + missingEntries.slice(0, missingEntries.length - 1).join(', ') + (missingEntries.length > 1 ? " and " : "") + missingEntries[missingEntries.length - 1];
+    detailElement.innerHTML = "";
+  } else {
+    const score = calculatePoints(values);
+    const riskLevel = score <= 6 ? "low-risk" : "high-risk";
+    const explanation = score <= 6 ? LOWRISK : HIGHRISK;
+    resultElement.innerHTML = "Total score: " + String(score) + ", <strong>" + riskLevel + "</strong>";
+    detailElement.innerHTML = explanation;
+  }
+}
+
+function missingCategories(values) {
+  const missing = [];
+  for (const category in CATEGORY_NAMES) {
+    if (!values.hasOwnProperty(category)) {
+      missing.push(CATEGORY_NAMES[category]);
+    }
+  }
+  return missing;
+}
+
+function calculatePoints(values) {
+  let sum = 0;
+  for (const category in values) {
+    sum += values[category];
+  }
+  return sum;
+}
+
+window.onload = function () {
+  Array.from(document.getElementsByTagName('input')).
+  filter(input => input.checked).
+  forEach(input => changeHandler(input));
+};
+//# sourceURL=pen.js
+</script>
+</body></html>
